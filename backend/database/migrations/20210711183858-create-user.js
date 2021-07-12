@@ -14,13 +14,14 @@ module.exports = {
 			lastName: {
 				type: Sequelize.STRING,
 			},
-			emailName: {
+			email: {
+				type: Sequelize.STRING,
+				unique: true,
+			},
+			password: {
 				type: Sequelize.STRING,
 			},
-			passwordName: {
-				type: Sequelize.STRING,
-			},
-			genderName: {
+			gender: {
 				type: Sequelize.STRING,
 			},
 			dateBirth: {
@@ -29,7 +30,7 @@ module.exports = {
 			infoSelf: {
 				type: Sequelize.TEXT,
 			},
-			avatarName: {
+			avatar: {
 				type: Sequelize.STRING,
 			},
 			createdAt: {
