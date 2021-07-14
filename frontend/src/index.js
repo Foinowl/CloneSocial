@@ -20,7 +20,6 @@ const checkMouse = (el) => {
     spanEl.style.top = relY + "px"
     spanEl.style.left = relX + "px"
   }
-
 }
 
 
