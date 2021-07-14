@@ -6,8 +6,6 @@ import "./scss/index.scss"
 
 const btns = document.querySelectorAll(".rootButton")
 
-var button;
-
 const checkMouse = (el) => {
   return (e) => {
 
