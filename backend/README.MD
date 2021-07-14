@@ -10,6 +10,7 @@ npx sequelize-cli db:migrate:undo
 
 # Creating the first Seed
 npx sequelize-cli seed:generate --name demo-user
+npx sequelize db:seed --seed 20210714184115-chats
 
 # Running Seeds
 npx sequelize-cli db:seed:all
