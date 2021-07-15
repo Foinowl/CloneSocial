@@ -10,4 +10,9 @@ router.post("/login", [loginRules, validate], login)
 
 router.post("/register", [registrationRules, validate], register)
 
+
+// router.post("/login", login)
+
+// router.post("/register", register)
+
 module.exports = router

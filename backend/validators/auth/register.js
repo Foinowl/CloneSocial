@@ -6,6 +6,6 @@ exports.rules = (() => {
         body('lastName').notEmpty(),
         body('gender').notEmpty(),
         body('email').isEmail(),
-        body('password').isLength({ min: 5 })
+        body('password').isLength({ min: 3 })
     ]
 })()
