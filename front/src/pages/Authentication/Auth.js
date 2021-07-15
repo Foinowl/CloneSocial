@@ -1,10 +1,15 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import Logo from '../../components/Logo'
 import Button from "../../components/Button"
+import Modal from "../../components/Modal"
+
 import "./Auth.scss"
 
 
 export const Auth = () => {
+
+	const [modalActive, setModalActive] = useState(false)
+
   return (
 		<div className="auth-container">
 			<div className="auth-container__left">
@@ -71,7 +76,20 @@ export const Auth = () => {
 						cls="fullWidth mb-20"
 					/>
 
-					<Button text="Войти" type="outlined" cls="fullWidth" />
+					<Button
+						text="Войти"
+						type="outlined"
+						cls="fullWidth"
+						onClick={() => setModalActive(true)}
+					/>
+
+					{
+						modalActive
+						&&
+						<Modal active={modalActive} setActive={setModalActive}>
+							<p>fwefwefwfwefwefwefwe</p>
+						</Modal>
+					}
 
 					{/* <button class="inLinedPrimary rootButton fullWidth mb-20">
 						Зарегистрироваться

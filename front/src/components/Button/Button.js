@@ -4,7 +4,7 @@ import './Button.scss'
 const Button = (props) => {
 
 
-	const { text, type, clickHandler, cls } = props
+	const { text, type, onClick, cls } = props
 	
 
 	const parentRef = React.useRef()
@@ -26,7 +26,7 @@ const Button = (props) => {
 
 	return (
 		<button
-			// onClick={() => clickHandler()}
+			onClick={onClick}
 			onMouseDown={hadlerMouse}
 			type="button"
 			className={`${"rootButton"} ${
