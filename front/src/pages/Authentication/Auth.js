@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import Logo from '../../components/Logo'
+import Button from "../../components/Button"
 import "./Auth.scss"
 
 
@@ -55,7 +56,7 @@ export const Auth = () => {
 			</div>
 
 			<div className="auth-container__right">
-				<div class="auth-container__right-loginSide">
+				<div className="auth-container__right-loginSide">
 					<Logo cls="logo"></Logo>
 
 					<h4>Узнайте, что происходит в мире прямо сейчас</h4>
@@ -64,18 +65,22 @@ export const Auth = () => {
 
 					<br />
 
-					<div class="btn">
-						<button class="inLinedPrimary rootButton fullWidth mb-20">
-							Зарегистрироваться
-							<span></span>
-						</button>
-					</div>
-					<div class="btn">
-						<button class="outlinedPrimary rootButton fullWidth">
-							Войти
-							<span></span>
-						</button>
-					</div>
+					<Button
+						text="Зарегистрироваться"
+						type="primary"
+						cls="fullWidth mb-20"
+					/>
+
+					<Button text="Войти" type="outlined" cls="fullWidth" />
+
+					{/* <button class="inLinedPrimary rootButton fullWidth mb-20">
+						Зарегистрироваться
+						<span></span>
+					</button>
+					<button class="outlinedPrimary rootButton fullWidth">
+						Войти
+						<span></span>
+					</button> */}
 				</div>
 			</div>
 		</div>

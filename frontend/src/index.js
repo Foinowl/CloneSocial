@@ -13,16 +13,16 @@ new AuthPage();
 //   return (e) => {
 
 
-//     const top = el.getBoundingClientRect().top + document.body.scrollTop
-//     const left = el.getBoundingClientRect().left + document.body.scrollLeft
+  //   const top = el.getBoundingClientRect().top + document.body.scrollTop
+  //   const left = el.getBoundingClientRect().left + document.body.scrollLeft
 
-//     const relX = e.pageX - left
-//     const relY = e.pageY - top
+  //   const relX = e.pageX - left
+  //   const relY = e.pageY - top
 
-//     const spanEl = el.getElementsByTagName("span")[0]
-//     spanEl.style.top = relY + "px"
-//     spanEl.style.left = relX + "px"
-//   }
+  //   const spanEl = el.getElementsByTagName("span")[0]
+  //   spanEl.style.top = relY + "px"
+  //   spanEl.style.left = relX + "px"
+  // }
 // }
 
 
