@@ -62,7 +62,7 @@ export const Auth = () => {
 
 			<div className="auth-container__right">
 				<div className="auth-container__right-loginSide">
-					<Logo cls="logo"></Logo>
+					<Logo cls="logo frontSvg"></Logo>
 
 					<h4>Узнайте, что происходит в мире прямо сейчас</h4>
 
@@ -83,13 +83,11 @@ export const Auth = () => {
 						onClick={() => setModalActive(true)}
 					/>
 
-					{
-						modalActive
-						&&
+					{modalActive && (
 						<Modal active={modalActive} setActive={setModalActive}>
 							<p>fwefwefwfwefwefwefwe</p>
 						</Modal>
-					}
+					)}
 
 					{/* <button class="inLinedPrimary rootButton fullWidth mb-20">
 						Зарегистрироваться
