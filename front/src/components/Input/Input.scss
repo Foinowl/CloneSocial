@@ -1,0 +1,79 @@
+.input__block input{
+  width: 100%;
+  height: 55px;
+  background-color: transparent;
+  border: 2px solid #56585a;
+  border-radius: 8px;
+  overflow-wrap: break-word;
+  margin-bottom: 35px;
+}
+
+
+.input__block label{
+  color: #56585a;
+  transition: -webkit-transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0s, transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0s, color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0s, font-size 150ms cubic-bezier(0.4, 0, 0.2, 1) 0s, padding-top 150ms cubic-bezier(0.4, 0, 0.2, 1) 0s;
+  pointer-events: none;
+  position: absolute;
+  top: 17px;
+  left: 10px;
+}
+
+.input__block input:focus {
+  outline: none !important;
+  border: 2px solid #03a9f4;
+  box-shadow: 0 0 10px rgba(32, 122, 213, 0.816);
+}
+
+.input__block input:active {
+  outline: none !important;
+  border: 2px solid #03a9f4;
+  box-shadow: 0 0 10px rgba(32, 122, 213, 0.816);
+}
+
+
+.input__block input:focus ~ label{
+  color: #03a9f4 !important;
+}
+
+
+.input__block input:focus ~ label,
+.input__block input:valid ~ label{
+  font-size: 14px;
+  line-height: 16px;
+  top: 4px;
+}
+
+
+.input__block--error input:focus {
+  outline: none;
+  border: 2px solid red;
+  box-shadow: 0 0 10px rgb(148, 43, 43);
+}
+
+
+
+.input__block--error input{
+  outline: none;
+  border: 2px solid red;
+  box-shadow: 0 0 10px rgb(148, 43, 43);
+}
+
+.input__block--error input:focus ~ label{
+  color: red !important;
+}
+
+
+
+
+
+.input__block--error span{
+  color: red;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 16px;
+  font-size: 13px;
+  font-weight: 400;
+  position: absolute;
+  top: 57px;
+  left: 5px;
+}
+

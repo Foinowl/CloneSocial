@@ -1,0 +1,131 @@
+.auth{
+  flex-grow: 1;
+  flex-shrink: 1;
+  width: 100%;
+
+  &__box{
+    margin-left: 32px;
+    margin-right: 32px;
+
+    &-create{
+      line-height: 28px;
+      font-size: 23px;
+      font-weight: 700;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin-bottom: 16px;
+      margin-top: 16p
+    }
+  }
+}
+
+
+
+.auth__form{
+  width: 100%;
+}
+
+.input__block{
+  position: relative;
+  color: rgb(5, 5, 5);
+  font-size: 17px;
+  width: 100%;
+  font-weight: 400;
+  line-height: 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.auth__select{
+  width: 100%;
+  display: flex;
+}
+
+.auth__item{
+  flex-grow: 1;
+  height: 40px;
+  margin-bottom: 35px;
+  position: relative;
+
+}
+
+.auth__item:not(:last-child){
+  margin-right: 12px;
+}
+
+
+.auth__item:nth-last-child(3){
+  flex-grow: 2;
+}
+
+
+.auth__item select{
+  appearance: none;
+  border: none;
+  outline: none !important;
+  display: inline-block;
+  cursor: pointer;
+  // overflow: hidden;
+  background-color: transparent;
+
+  // padding: 20px 20px 20px 0px;
+  height: 50px;
+  padding-top: 25px;
+  padding-left: 10px;
+  width: 100%;
+  border: 2px solid #56585a;;
+  box-shadow: 0 0 10px rgba(61, 64, 68, 0.816);
+  border-radius: 8px;
+}
+
+.auth__item:hover {
+
+  select{
+    outline: none !important;
+    border: 2px solid #03a9f4;
+    box-shadow: 0 0 10px rgba(32, 122, 213, 0.816);
+  }
+
+
+  label:after{
+    color: #03a9f4;
+  }
+
+  span{
+    color: #03a9f4;
+  }
+}
+
+.auth__item label {
+  position: relative;
+}
+
+.auth__item span{
+  color: #56585a;
+  position: absolute;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 16px;
+  font-size: 13px;
+  font-weight: 400;
+  left: 10px;
+  top: 3px;
+}
+
+
+
+.auth__item label:after {
+    content: '>';
+    font: 30px "Consolas", monospace;
+    flex-grow: 1;
+    font-size: 32px;
+    color: #666;
+    transform: rotate(
+90deg
+);
+    right: 20px;
+    top: -18px;
+    padding: 0 0 2px;
+    border-bottom: 2px solid #ddd;
+    position: absolute;
+    pointer-events: none;
+}
+
+

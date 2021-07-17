@@ -4,7 +4,7 @@ import './Button.scss'
 const Button = (props) => {
 
 
-	const { text, type, onClick, cls } = props
+	const { text, type, onClick, cls, disabled = false } = props
 	
 
 	const parentRef = React.useRef()
@@ -29,6 +29,7 @@ const Button = (props) => {
 			onClick={onClick}
 			onMouseDown={hadlerMouse}
 			type="button"
+			disabled={disabled}
 			className={`${"rootButton"} ${
 				type === "primary" ? "inLinedPrimary" : "outlinedPrimary"
 			} ${cls}`}

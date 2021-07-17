@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react"
 import Logo from '../../components/Logo'
 import Button from "../../components/Button"
-import Modal from "../../components/Modal"
+
+import RegisterModal from "./components/RegisterModal"
+import LoginModal from "./components/LoginModal"
 
 import "./Auth.scss"
 
 
 export const Auth = () => {
 
-	const [modalActive, setModalActive] = useState(false)
+	const [registerModalActive, setRegisterModalActive] = useState(false)
+	const [loginModalActive, setLoginModalActive] = useState(false)
 
   return (
 		<div className="auth-container">
@@ -74,29 +77,29 @@ export const Auth = () => {
 						text="Зарегистрироваться"
 						type="primary"
 						cls="fullWidth mb-20"
+						onClick={() => setRegisterModalActive(true)}
 					/>
 
 					<Button
 						text="Войти"
 						type="outlined"
 						cls="fullWidth"
-						onClick={() => setModalActive(true)}
+						onClick={() => setLoginModalActive(true)}
 					/>
 
-					{modalActive && (
-						<Modal active={modalActive} setActive={setModalActive}>
-							<p>fwefwefwfwefwefwefwe</p>
-						</Modal>
+					{registerModalActive && (
+						<RegisterModal
+							active={registerModalActive}
+							setActive={setRegisterModalActive}
+						></RegisterModal>
 					)}
 
-					{/* <button class="inLinedPrimary rootButton fullWidth mb-20">
-						Зарегистрироваться
-						<span></span>
-					</button>
-					<button class="outlinedPrimary rootButton fullWidth">
-						Войти
-						<span></span>
-					</button> */}
+					{loginModalActive && (
+						<LoginModal
+							active={loginModalActive}
+							setActive={setLoginModalActive}
+						></LoginModal>
+					)}
 				</div>
 			</div>
 		</div>

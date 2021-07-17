@@ -2,53 +2,41 @@ import React, { useRef } from 'react'
 import "./Modal.scss"
 import Button from '../Button'
 
-const Modal = ({ active, setActive, children, auth }) => {
-
+const Modal = ({ active, setActive, auth, children }) => {
 	const isAuth = auth ? true : false
 
-	console.log(isAuth);
 	const markupDefaults = () => {
 		return (
 			<>
-			<div className="modal__bottom-image-about">
-				<h1>Картинка</h1>
-			</div>
+				<div className="modal__bottom-image-about">
+					<h1>Картинка</h1>
+				</div>
 
-			<div className="modal__bottom-info">
-				<div className="modal__text">
-					<div className="modal__text-top">
-						<span>
-							Чтобы поделиться интересной информацией со всеми, делайте
-							ретвиты.
-						</span>
+				<div className="modal__bottom-info">
+					<div className="modal__text">
+						<div className="modal__text-top">
+							<span>
+								Чтобы поделиться интересной информацией со всеми, делайте
+								ретвиты.
+							</span>
+						</div>
+						<div className="modal__text-bottom">
+							<span>
+								Когда вы присоединитесь к Твиттеру, вы сможете делиться твитами
+								Emily Giovazzino со своими читателями.
+							</span>
+						</div>
 					</div>
-					<div className="modal__text-bottom">
-						<span>
-							Когда вы присоединитесь к Твиттеру, вы сможете делиться
-							твитами Emily Giovazzino со своими читателями.
-						</span>
+					<div className="modal__bottom-children">
+						<Button text="Войти" type="outlined" cls="fullWidth mb-20"></Button>
+						<Button
+							text="Зарегистрироваться"
+							type="primary"
+							cls="fullWidth"
+						></Button>
 					</div>
 				</div>
-				<div className="modal__bottom-children">
-					<Button
-						text="Войти"
-						type="outlined"
-						cls="fullWidth mb-20"
-					></Button>
-					<Button
-						text="Зарегистрироваться"
-						type="primary"
-						cls="fullWidth"
-					></Button>
-				</div>
-		</div>
-				</>
-		)
-	}
-
-	const markupAuth = () => {
-		return (
-			{children}
+			</>
 		)
 	}
 
@@ -74,7 +62,7 @@ const Modal = ({ active, setActive, children, auth }) => {
 				</div>
 
 				<div className="modal__content-bottom">
-					{isAuth ? markupAuth() : markupDefaults()}
+					{isAuth ? children : markupDefaults()}
 				</div>
 			</div>
 		</div>

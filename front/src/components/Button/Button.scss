@@ -76,3 +76,9 @@
     background-color: rgba(170, 222, 225, 0.51)
   }
 }
+
+button[disabled],
+button[disabled]:hover,
+button[disabled]:active{
+  opacity: .3; 
+}
