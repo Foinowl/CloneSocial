@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
+import { Redirect } from "react-router-dom"
+
 import Logo from '../../components/Logo'
 import Button from "../../components/Button"
 
@@ -8,10 +11,22 @@ import LoginModal from "./components/LoginModal"
 import "./Auth.scss"
 
 
-export const Auth = () => {
+export const Auth = ({ history }) => {
+	
+	const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
 	const [registerModalActive, setRegisterModalActive] = useState(false)
 	const [loginModalActive, setLoginModalActive] = useState(false)
+
+
+	
+	useEffect(() => {
+		console.log(isLoggedIn);
+		if (isLoggedIn) {
+			<Redirect to="/" />
+		}
+	}, [history, isLoggedIn])
+	
 
   return (
 		<div className="auth-container">
@@ -89,6 +104,7 @@ export const Auth = () => {
 
 					{registerModalActive && (
 						<RegisterModal
+							history={history}
 							active={registerModalActive}
 							setActive={setRegisterModalActive}
 						></RegisterModal>
@@ -96,6 +112,7 @@ export const Auth = () => {
 
 					{loginModalActive && (
 						<LoginModal
+							history={history}
 							active={loginModalActive}
 							setActive={setLoginModalActive}
 						></LoginModal>

@@ -8,20 +8,24 @@ import YearSelect from "../../../components/SelectDate/YearSelect"
 import DaySelect from "../../../components/SelectDate/DaySelect"
 
 
+import { useDispatch } from "react-redux"
+import { register } from "../../../store/actions/auth"
+
 
 import { Validators } from '../../../utils/validators'
 
 import "./AuthModal.scss"
 
 
-const RegisterModal = ({ active, setActive }) => {
+const RegisterModal = ({ active, setActive, history }) => {
+	const dispatch = useDispatch()
+
 	const [days, setDays] = useState("")
 	const [years, setYears] = useState("")
 	const [months, setMonths] = useState("")
-	
+
 	const [formValid, setFormValid] = useState(false)
 	const [selectValid, setSelectValid] = useState(false)
-
 
 	const [stateControls, setControls] = useState({
 		firstName: {
@@ -73,14 +77,24 @@ const RegisterModal = ({ active, setActive }) => {
 			},
 		},
 	})
-	
 
 	useEffect(() => {
 		setSelectValid(months && days && years)
 	}, [months, days, years])
 
-	const onHadlerClick = (e) => {
-		console.log(stateControls)
+
+	const submitForm = (e) => {
+		e.preventDefault()
+
+		const dateBirth = new Date(years, months - 1, days)
+		const data = Object.keys(stateControls).map((el) => {
+			const valueEl = stateControls[el].value
+			return {[el]:valueEl}
+		}).reduce((prevVal, curr) => {
+			return prevVal = {...prevVal, ...curr}
+		}, {})
+
+		dispatch(register({ ...data, dateBirth }, history))
 	}
 
 	const validateControl = (value, validation) => {
@@ -99,10 +113,8 @@ const RegisterModal = ({ active, setActive }) => {
 	}
 
 	const changeInputs = (e) => {
-
-
 		const { name, value } = e.target
-		
+
 		const control = { ...stateControls[name] }
 
 		control.value = value
@@ -116,7 +128,7 @@ const RegisterModal = ({ active, setActive }) => {
 		})
 
 		setFormValid(isFormValid)
-		
+
 		// setControls({ ...stateControls, ...{ [name]: control } })
 		setControls((prevState) => ({
 			...prevState,
@@ -124,28 +136,27 @@ const RegisterModal = ({ active, setActive }) => {
 		}))
 	}
 
-	  const renderInputs = () => {
-			return Object.keys(stateControls).map((controlName, index) => {
-				const control = stateControls[controlName]
-				return (
-					<Input
-						key={controlName + index}
-						type={control.type}
-						value={control.value}
-						name={controlName}
-						valid={control.valid}
-						touched={control.touched}
-						label={control.label}
-						shouldValidate={!!control.validation}
-						errorMessage={control.errorMessage}
-						onChange={changeInputs}
-					/>
-				)
-			})
-  }
+	const renderInputs = () => {
+		return Object.keys(stateControls).map((controlName, index) => {
+			const control = stateControls[controlName]
+			return (
+				<Input
+					key={controlName + index}
+					type={control.type}
+					value={control.value}
+					name={controlName}
+					valid={control.valid}
+					touched={control.touched}
+					label={control.label}
+					shouldValidate={!!control.validation}
+					errorMessage={control.errorMessage}
+					onChange={changeInputs}
+				/>
+			)
+		})
+	}
 
 	return (
-		
 		<Modal active={active} setActive={setActive} auth={true}>
 			<div className="auth">
 				<div className="auth__box">
@@ -200,7 +211,7 @@ const RegisterModal = ({ active, setActive }) => {
 							text="Зарегистрироваться"
 							type="primary"
 							cls="fullWidth"
-							onClick={onHadlerClick}
+							onClick={submitForm}
 							disabled={!formValid || !selectValid}
 						/>
 					</form>
@@ -208,7 +219,6 @@ const RegisterModal = ({ active, setActive }) => {
 			</div>
 		</Modal>
 	)
-  
 }
 
 

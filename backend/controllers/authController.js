@@ -6,6 +6,7 @@ const config = require("../config/app")
 exports.login = async (req, res) => {
 	const { email, password } = req.body
 
+	console.log(req.body);
 	try {
 
 		// find the user
@@ -34,7 +35,14 @@ exports.login = async (req, res) => {
 
 exports.register = async (req, res) => {
 	try {
-		const user = await User.create(req.body)
+		
+		const user = await User.create({
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			email: req.body.email,
+			dateBirth: req.body.dateBirth,
+			password: bcrypt.hashSync(req.body.password, 10),
+		})
 
 		const userWithToken = generateToken(user.get({ raw: true }))
 		return res.send(userWithToken)
