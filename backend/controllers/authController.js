@@ -26,7 +26,7 @@ exports.login = async (req, res) => {
 		const userWithToken = generateToken(user.get({ raw: true }))
 		userWithToken.user.avatar = user.avatar
 
-		// console.log(userWithToken);
+		console.log(userWithToken);
 		return res.send(userWithToken)
 	} catch (e) {
 		console.log(e);
@@ -45,7 +45,7 @@ exports.register = async (req, res) => {
 		// 	password: bcrypt.hashSync(req.body.password, 10),
 		// })
 
-				const user = await User.create(req.body)
+		const user = await User.create(req.body)
 
 
 		const userWithToken = generateToken(user.get({ raw: true }))

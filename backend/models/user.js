@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
 				unique: true,
 			},
 			password: DataTypes.STRING,
-			gender: DataTypes.STRING,
+			gender: { type:DataTypes.STRING, defaultValue: "male" },
 			dateBirth: DataTypes.DATE,
 			infoSelf: DataTypes.TEXT,
 			avatar: {
@@ -43,7 +43,6 @@ module.exports = (sequelize, DataTypes) => {
 						return `${url}/${this.getDataValue("gender")}.svg`
 					}
 
-					console.log("VOTT NATT")
 					const id = this.getDataValue("id")
 					return `${url}/user/${id}/${avatar}`
 				},

@@ -1,4 +1,6 @@
 import axios from "axios"
+import {store} from "../store/index"
+import { logout } from "../store/actions/auth"
 
 const data = JSON.parse(localStorage.getItem("persist:user"))
 const newData = data ? JSON.parse(data.auth) : ""
@@ -19,6 +21,13 @@ API.interceptors.response.use(
 	(err) => {
 		if (err.response.status !== 401) {
 			throw err
+		}
+
+		if (typeof err.response.data.error.name !== "undefined") {
+			if (err.response.data.error.name === "TokenExpiredError") {
+				store.dispatch(logout())
+				throw err
+			}
 		}
 	}
 )

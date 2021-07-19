@@ -8,34 +8,7 @@ const Modal = ({ active, setActive, auth, children }) => {
 	const markupDefaults = () => {
 		return (
 			<>
-				<div className="modal__bottom-image-about">
-					<h1>Картинка</h1>
-				</div>
-
-				<div className="modal__bottom-info">
-					<div className="modal__text">
-						<div className="modal__text-top">
-							<span>
-								Чтобы поделиться интересной информацией со всеми, делайте
-								ретвиты.
-							</span>
-						</div>
-						<div className="modal__text-bottom">
-							<span>
-								Когда вы присоединитесь к Твиттеру, вы сможете делиться твитами
-								Emily Giovazzino со своими читателями.
-							</span>
-						</div>
-					</div>
-					<div className="modal__bottom-children">
-						<Button text="Войти" type="outlined" cls="fullWidth mb-20"></Button>
-						<Button
-							text="Зарегистрироваться"
-							type="primary"
-							cls="fullWidth"
-						></Button>
-					</div>
-				</div>
+				{children}
 			</>
 		)
 	}

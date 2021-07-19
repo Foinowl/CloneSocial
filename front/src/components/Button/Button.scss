@@ -1,7 +1,9 @@
 .rootButton{
   background-color: #fff;
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
   border: 0;
   cursor: pointer;

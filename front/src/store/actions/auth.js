@@ -1,5 +1,5 @@
 import AuthService from "../../services/authService"
-import { LOGIN, REGISTER } from "../types/index"
+import { LOGIN, REGISTER, LOGOUT } from "../types/index"
 
 
 export const login = (params, history) => (dispatch) => {
@@ -20,4 +20,10 @@ export const register = (params, history) => (dispatch) => {
 			history.push("/")
 		})
 		.catch((err) => {})
+}
+
+
+export const logout = () => (dispatch) => {
+	AuthService.logout()
+	dispatch({ type: LOGOUT })
 }

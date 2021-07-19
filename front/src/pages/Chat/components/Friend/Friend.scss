@@ -26,9 +26,14 @@
         }
     }
 
+
     .friend-status {
         display: flex;
         align-items: center;
         justify-content: center;
     }
+}
+
+.opened{
+    background-color: #d8d8d8;
 }

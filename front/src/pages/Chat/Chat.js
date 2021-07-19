@@ -4,6 +4,7 @@ import useSocket from "./hooks/socketConnect"
 
 import Messenger from "./components/Messenger/Messenger"
 import FriendList from "./components/FriendList/FriendList"
+import Navbar from "./components/Navbar/Navbar"
 
 
 import "./Chat.scss"
@@ -19,6 +20,7 @@ export const Chat = () => {
 
 	return (
 		<div id="chat-container">
+			<Navbar />
 			<div id="chat-wrap">
 
 				<FriendList />
