@@ -6,12 +6,14 @@ const users = new Map()
 const userSockets = new Map()
 
 const SocketServer = (server) => {
-    const io = socketIo(server)
+    const io = socketIo.listen(server)
 
     io.on('connection', (socket) => {
 
         socket.on('join', async (user) => {
 
+            console.log("we here join", user);
+            
             let sockets = []
 
             if (users.has(user.id)) {

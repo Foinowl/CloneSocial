@@ -13,12 +13,10 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       this.belongsTo(models.Chat, { foreignKey: "chatId" })
 			this.belongsTo(models.User, { foreignKey: "fromUserId" })
-			this.belongsTo(models.Message, {foreignKey: "parentId"})
     }
   };
   Message.init(
 		{
-			parentId: DataTypes.INTEGER,
 			type: DataTypes.STRING,
 			message: {
 				type: DataTypes.TEXT,

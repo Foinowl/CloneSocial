@@ -7,6 +7,7 @@ const app = express()
 const http = require("http")
 
 
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
@@ -18,11 +19,15 @@ app.use(express.static(__dirname + "/uploads"))
 const port = config.appPort
 
 
-const server = http.createServer(app)
+// const server = http.createServer(app)
+var server = app.listen(port, () => {
+	console.log(`Server listening in the port: ${port}`)
+})
+
 const SocketServer = require("./socket")
 SocketServer(server)
 
 
-app.listen(port, () => {
-  console.log(`Server listening in the port: ${port}`)
-})
+// app.listen(port, () => {
+//   console.log(`Server listening in the port: ${port}`)
+// })

@@ -1,12 +1,11 @@
 const User = require("../models").User
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
-const config = require("../config/app")
+const config = require('../config/app')
 
 exports.login = async (req, res) => {
 	const { email, password } = req.body
 
-	console.log(req.body);
 	try {
 
 		// find the user
@@ -27,8 +26,10 @@ exports.login = async (req, res) => {
 		const userWithToken = generateToken(user.get({ raw: true }))
 		userWithToken.user.avatar = user.avatar
 
+		// console.log(userWithToken);
 		return res.send(userWithToken)
 	} catch (e) {
+		console.log(e);
 		return res.status(500).json({ message: e.message })
 	}
 }
@@ -36,13 +37,16 @@ exports.login = async (req, res) => {
 exports.register = async (req, res) => {
 	try {
 		
-		const user = await User.create({
-			firstName: req.body.firstName,
-			lastName: req.body.lastName,
-			email: req.body.email,
-			dateBirth: req.body.dateBirth,
-			password: bcrypt.hashSync(req.body.password, 10),
-		})
+		// const user = await User.create({
+		// 	firstName: req.body.firstName,
+		// 	lastName: req.body.lastName,
+		// 	email: req.body.email,
+		// 	dateBirth: req.body.dateBirth,
+		// 	password: bcrypt.hashSync(req.body.password, 10),
+		// })
+
+				const user = await User.create(req.body)
+
 
 		const userWithToken = generateToken(user.get({ raw: true }))
 		return res.send(userWithToken)

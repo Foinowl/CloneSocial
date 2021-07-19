@@ -8,15 +8,6 @@ module.exports = {
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			parentId: {
-				type: Sequelize.INTEGER,
-				allowNull: true,
-				references: {
-					model: "Messages",
-					key: "id",
-				},
-				onDelete: "CASCADE",
-			},
 			type: {
 				type: Sequelize.STRING,
 				defaultValue: "text",
