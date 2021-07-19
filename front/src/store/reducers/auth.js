@@ -1,4 +1,4 @@
-import { LOGIN, REGISTER, LOGOUT } from "../types/index"
+import { LOGIN, REGISTER, LOGOUT, UPDATE_PROFILE } from "../types/index"
 
 const initialState = {
 	user: {},
@@ -33,6 +33,11 @@ const authReducer = (state = initialState, action) => {
 				user: {},
 				token: "",
 				isLoggedIn: false,
+			}
+		case UPDATE_PROFILE:
+			return {
+				...state,
+				user: payload,
 			}
 
 		default: {
