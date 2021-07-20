@@ -136,6 +136,15 @@ const RegisterModal = ({ active, setActive, history }) => {
 		}))
 	}
 
+	useEffect(() => {
+		let isFormValid = true
+		Object.keys(stateControls).forEach((name) => {
+			isFormValid = stateControls[name].valid && isFormValid
+		})
+
+		setFormValid(isFormValid)
+	}, [stateControls])
+
 	const renderInputs = () => {
 		return Object.keys(stateControls).map((controlName, index) => {
 			const control = stateControls[controlName]

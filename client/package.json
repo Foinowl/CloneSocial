@@ -50,5 +50,6 @@
 	},
 	"devDependencies": {
 		"svg-url-loader": "^7.1.1"
-	}
+	},
+	"proxy": "http://localhost:3005"
 }

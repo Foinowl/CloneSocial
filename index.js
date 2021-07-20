@@ -25,6 +25,9 @@ app.use(router)
 app.use(express.static(__dirname + "/public"))
 app.use(express.static(__dirname + "/uploads"))
 
+
+
+
 const PORT = config.appPort
 
 

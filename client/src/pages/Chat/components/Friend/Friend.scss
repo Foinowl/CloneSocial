@@ -22,7 +22,14 @@
         .friend-info {
             display: flex;
             align-self: center;
-            flex-direction: column
+            flex-direction: column;
+
+
+            h5{
+                white-space: nowrap;
+                overflow: hidden;
+                max-width: 165px;
+            }
         }
     }
 
