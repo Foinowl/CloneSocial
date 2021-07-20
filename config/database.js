@@ -28,6 +28,10 @@ module.exports = {
 		database: process.env.DB_DATABASE,
 		host: process.env.DB_HOST,
 		dialect: "postgres",
-		use_env_variable: 'DATABASE_URL',
+		dialectOptions: {
+			ssl: true,
+			native: true,
+		},
+		use_env_variable: "DATABASE_URL",
 	},
 }
