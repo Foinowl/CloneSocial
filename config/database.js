@@ -23,11 +23,12 @@ module.exports = {
 	// 	},
 	// },
 	production: {
-		dialect: "postgres",
+		use_env_variable: process.env.DATABASE_URL,
+		dialect: 'postgres',
+		protocol: 'postgres',
 		dialectOptions: {
-			ssl: true,
-			native: true,
+			ssl: true
 		},
-		use_env_variable: "DATABASE_URL",
+	
 	},
 }
