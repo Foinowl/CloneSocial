@@ -26,7 +26,6 @@ exports.login = async (req, res) => {
 		const userWithToken = generateToken(user.get({ raw: true }))
 		userWithToken.user.avatar = user.avatar
 
-		console.log(userWithToken);
 		return res.send(userWithToken)
 	} catch (e) {
 		console.log(e);
