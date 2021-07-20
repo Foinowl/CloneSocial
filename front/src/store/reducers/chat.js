@@ -224,6 +224,7 @@ const chatReducer = (state = initialState, action) => {
 
             let currentChatCopy = { ...state.currentChat }
 
+            console.log(currentChatCopy);
             const chatsCopy = state.chats.map(chat => {
                 if (chat.id === id) {
                     const shifted = [...messages, ...chat.Messages]
@@ -244,6 +245,7 @@ const chatReducer = (state = initialState, action) => {
                 return chat
             })
 
+            console.log(currentChatCopy)
             return {
                 ...state,
                 chats: chatsCopy,

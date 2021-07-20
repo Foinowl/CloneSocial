@@ -1,7 +1,8 @@
 import { createStore, applyMiddleware, compose } from "redux"
 import thunk from "redux-thunk"
 
-import { persistStore} from 'redux-persist'
+import { persistStore } from "redux-persist"
+
 
 import rootReducer from "./reducers"
 
@@ -12,7 +13,7 @@ const composeEnhancers =
 		: null) || compose
 
 const enhancer = composeEnhancers(
-	applyMiddleware(thunk)
+	applyMiddleware(thunk),
 	// other store enhancers if any
 )
 
