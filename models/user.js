@@ -43,6 +43,7 @@ module.exports = (sequelize, DataTypes) => {
 						return `${url}/${this.getDataValue("gender")}.svg`
 					}
 
+
 					const id = this.getDataValue("id")
 					return `${url}/user/${id}/${avatar}`
 				},
