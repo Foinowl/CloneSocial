@@ -2,7 +2,6 @@ import API from './api'
 
 const AuthService = {
 	login: (data) => {
-		console.log(data)
 		return API.post("/login", data)
 			.then(({ data }) => {
 				// setHeadersAndStorage(data)

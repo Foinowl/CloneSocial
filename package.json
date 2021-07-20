@@ -1,0 +1,23 @@
+{
+  "name": "clonetwitter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "sequelize-cli": "^6.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Foinowl/CloneSocial.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Foinowl/CloneSocial/issues"
+  },
+  "homepage": "https://github.com/Foinowl/CloneSocial#readme"
+}

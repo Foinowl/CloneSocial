@@ -163,7 +163,6 @@ const Navbar = () => {
 		})
 
 		setFormValid(isFormValid)
-		console.log(isFormValid);
 
 			setControls((prevState) => ({
 				...prevState,

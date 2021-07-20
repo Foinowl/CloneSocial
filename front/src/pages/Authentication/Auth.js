@@ -21,7 +21,6 @@ export const Auth = ({ history }) => {
 
 	
 	useEffect(() => {
-		console.log(isLoggedIn);
 		if (isLoggedIn) {
 			<Redirect to="/" />
 		}
