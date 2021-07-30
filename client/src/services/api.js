@@ -1,9 +1,13 @@
 import axios from "axios"
 import {store} from "../store/index"
 import { logout } from "../store/actions/auth"
+import { useSelector } from 'react-redux'
 
 const data = JSON.parse(localStorage.getItem("persist:user"))
-const newData = data ? JSON.parse(data.auth) : ""
+const newData = data
+	? JSON.parse(data.auth) : ''
+
+console.log(store);
 
 const API = axios.create({
 	// baseURL: "http://127.0.0.1:3005",

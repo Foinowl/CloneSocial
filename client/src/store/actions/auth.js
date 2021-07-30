@@ -9,7 +9,8 @@ export const login = (params, history) => (dispatch) => {
 			dispatch({ type: LOGIN, payload: data })
 			history.push("/")
 		})
-		.catch((err) => {})
+		.catch((err) => {
+		})
 }
 
 export const register = (params, history) => (dispatch) => {

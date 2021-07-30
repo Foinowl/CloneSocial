@@ -10,9 +10,10 @@ const SocketServer = (server) => {
 
     io.on('connection', (socket) => {
 
+
         socket.on('join', async (user) => {
             
-            let sockets = []
+			let sockets = []
 
             if (users.has(user.id)) {
                 const existingUser = users.get(user.id)
@@ -103,18 +104,19 @@ const SocketServer = (server) => {
             try {
 
                 let online = 'offline'
+				if (users.has(chats[0].Users[0].id)) {
+					online = "online"
+					chats[1].Users[0].status = online
+					users
+						.get(chats[0].Users[0].id)
+						.sockets.forEach((socket) => {
+							io.to(socket).emit("new-chat", chats[1])
+						})
+				}
                 if (users.has(chats[1].Users[0].id)) {
-                    online = 'online'
-                    chats[0].Users[0].status = 'online'
+                    chats[0].Users[0].status = online
                     users.get(chats[1].Users[0].id).sockets.forEach(socket => {
                         io.to(socket).emit('new-chat', chats[0])
-                    })
-                }
-
-                if (users.has(chats[0].Users[0].id)) {
-                    chats[1].Users[0].status = online
-                    users.get(chats[0].Users[0].id).sockets.forEach(socket => {
-                        io.to(socket).emit('new-chat', chats[1])
                     })
                 }
 

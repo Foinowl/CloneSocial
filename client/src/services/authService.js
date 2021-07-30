@@ -4,7 +4,7 @@ const AuthService = {
 	login: (data) => {
 		return API.post("/login", data)
 			.then(({ data }) => {
-				// setHeadersAndStorage(data)
+				setHeadersAndStorage(data)
 				return data
 			})
 			.catch((err) => {
@@ -16,7 +16,7 @@ const AuthService = {
 	register: (data) => {
 		return API.post("/register", data)
 			.then(({ data }) => {
-				// setHeadersAndStorage(data)
+				setHeadersAndStorage(data)
 				return data
 			})
 			.catch((err) => {
@@ -47,9 +47,8 @@ const AuthService = {
 }
 
 
-const setHeadersAndStorage = ({ user, token }) => {
+const setHeadersAndStorage = ({ token }) => {
 	API.defaults.headers["Authorization"] = `Bearer ${token}`
-	localStorage.setItem("user", JSON.stringify({ user, token }))
 }
 
 export default AuthService

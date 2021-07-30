@@ -54,14 +54,14 @@ const LoginModal = ({ active, setActive, history }) => {
 		e.preventDefault()
 
 
-	const data = Object.keys(stateControls)
-		.map((el) => {
-			const valueEl = stateControls[el].value
-			return { [el]: valueEl }
-		})
-		.reduce((prevVal, curr) => {
-			return (prevVal = { ...prevVal, ...curr })
-		}, {})
+		const data = Object.keys(stateControls)
+			.map((el) => {
+				const valueEl = stateControls[el].value
+				return { [el]: valueEl }
+			})
+			.reduce((prevVal, curr) => {
+				return (prevVal = { ...prevVal, ...curr })
+			}, {})
 
 		dispatch(login({ ...data }, history))
 	}

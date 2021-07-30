@@ -42,6 +42,7 @@ const FriendList = () => {
 	const addNewFriend = (id) => {
 		ChatService.createChat(id)
 			.then((chats) => {
+				console.log("Chats", chats);
 				socket.emit("add-friend", chats)
 				setShowFriendsModal(false)
 			})
