@@ -21,8 +21,20 @@
 
 
 .auth__form{
-  width: 100%;
-}
+  width: 425px;
+
+  @media(min-width: 1024px){
+	  width: 380px;
+  }
+
+  @media(min-width: 720px){
+	  width: 360px;
+  }
+
+  @media(min-width: 560px){
+	  width: 300px;
+  }
+ }
 
 .input__block{
   position: relative;

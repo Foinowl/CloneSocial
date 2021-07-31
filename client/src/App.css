@@ -23,8 +23,6 @@
 }
 
 
-
-
 .svg-el{
   fill: currentColor;
   width: 1em;
@@ -65,8 +63,6 @@
 }
 
 
-
-
 .textArea {
 
   overflow: auto hidden;
@@ -97,6 +93,13 @@
   border-radius: 8px;
   overflow-wrap: break-word;
   margin-bottom: 35px;
+
+
+	@media(min-width:1024px) {
+		height:50px;
+		margin-bottom: 15px;
+		font-size: 12px;
+    }
 }
 
 .textArea:focus {

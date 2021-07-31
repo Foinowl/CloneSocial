@@ -28,6 +28,14 @@
       border-radius: 12px;
       padding-left: 12px;
       padding-right: 12px;
+
+
+	  @media(min-width:1024px) {
+			height: 0px;
+			border-radius: 12px;
+			padding-left: 12px;
+			padding-right: 12px;
+	  }
     }
 
     &-bottom{
@@ -84,6 +92,20 @@
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         text-align: center;
       }
+
+	  @media(min-width:1024px) {
+		margin-bottom: 15px;
+
+		img{
+			width: 25px;
+			height: 25px;
+		}
+
+		span{
+			font-size: 16px;
+			line-height: 16px;
+		}
+	  }
     }
 
     
@@ -167,6 +189,27 @@
   svg{
     fill: rgb(29, 161, 242);
   }
+
+
+  @media(min-width:1024px) {
+		display: flex;
+		align-items: center;
+		justify-content: start;
+		width: 0px;
+		height: 0px;
+		margin-top: 8px;
+		outline-style: none;
+		background-color: hsla(0,0%,100%,0);
+		border-radius: 50%;
+		border: 1px solid transparent;
+		transition-duration: .2s;
+		transition-property: background-color,box-shadow;
+
+		&__svg{
+			width: 15px;
+			height: 15px;
+  		}
+	}
 }
 
 

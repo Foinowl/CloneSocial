@@ -256,13 +256,13 @@ const Navbar = () => {
 					>
 						<div
 							className="modal__bottom-image-about--left"
-							style={{ marginBottom: "25px" }}
+							style={{ marginBottom: "15px" }}
 						>
 							<img src={updateProfileSvg}></img>
 							<span className="m-0">Update profile</span>
 						</div>
 						<div className="modal__bottom-info">
-							<form className="auth__form" style={{ width: "400px" }}>
+							<form className="auth__form">
 								{renderInputs()}
 								<div className="fileContainer">
 									<span id="spanFile">Загрузить</span>
