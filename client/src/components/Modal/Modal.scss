@@ -30,7 +30,7 @@
       padding-right: 12px;
 
 
-	  @media(min-width:1024px) {
+	  @media(max-width:1024px) {
 			height: 0px;
 			border-radius: 12px;
 			padding-left: 12px;
@@ -93,7 +93,7 @@
         text-align: center;
       }
 
-	  @media(min-width:1024px) {
+	  @media(max-width:1024px) {
 		margin-bottom: 15px;
 
 		img{
@@ -191,7 +191,7 @@
   }
 
 
-  @media(min-width:1024px) {
+  @media(max-width:1024px) {
 		display: flex;
 		align-items: center;
 		justify-content: start;
