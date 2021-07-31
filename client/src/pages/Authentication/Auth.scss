@@ -3,6 +3,12 @@
   display: flex;
 
 
+  @media(max-width:425px) {
+	  height: 100vh;
+	  display: flex;
+	  flex-direction: column-reverse;
+  }
+
   &__left{
     flex: 0 0 50%;
     display: flex;
@@ -63,9 +69,6 @@
   }
 
   @media(max-width:425px) {
-	height: 100vh;
-	display: flex;
-	flex-direction: column-reverse;
 
 	&-title{
 		color: white;
