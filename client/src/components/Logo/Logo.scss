@@ -9,8 +9,15 @@
 }
 
 
-
-
 .frontSvg{
   font-size: 45px;
+
+  	@media(max-width:768px) {
+		font-size: 35px;
+	}
+
+	
+  	@media(max-width:425px) {
+		font-size: 20px;
+	}
 }
