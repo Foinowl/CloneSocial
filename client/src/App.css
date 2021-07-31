@@ -94,12 +94,15 @@
   overflow-wrap: break-word;
   margin-bottom: 35px;
 
+}
 
-	@media(max-width:1024px) {
+
+@media(max-width:1024px) {
+	.textArea{
 		height:50px;
 		margin-bottom: 15px;
 		font-size: 12px;
-    }
+	}
 }
 
 .textArea:focus {
