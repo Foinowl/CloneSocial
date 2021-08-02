@@ -10,7 +10,7 @@ const SocketServer = (server) => {
 
     io.on('connection', (socket) => {
 
-
+		console.log("conntection");
         socket.on('join', async (user) => {
             
 			let sockets = []
