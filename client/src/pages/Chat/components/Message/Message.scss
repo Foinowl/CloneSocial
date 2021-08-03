@@ -2,12 +2,17 @@
     justify-content: flex-end;
 }
 
-
+.focus {
+	background: #eff1f4;
+}
 .message {
     display: flex;
     padding-right: 5px;
     text-align: left;
 	cursor: pointer;
+	position: relative;
+
+
 
     p {
         word-wrap: break-word;

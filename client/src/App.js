@@ -18,6 +18,9 @@ import {
 	faUpload,
 	faTimes,
 	faBell,
+	faRetweet,
+	faPlusSquare,
+	faWindowClose,
 } from "@fortawesome/free-solid-svg-icons"
 library.add(
 	faSmile,
@@ -30,7 +33,10 @@ library.add(
 	faCaretDown,
 	faUpload,
 	faTimes,
-	faBell
+	faBell,
+	faRetweet,
+	faPlusSquare,
+	faWindowClose,
 )
 
 function App() {

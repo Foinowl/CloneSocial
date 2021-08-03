@@ -44,8 +44,11 @@ exports.index = async (req, res) => {
 
 
 exports.create = async (req, res) => {
-	const { partnerId } = req.body
+	const { partnerId, fromRepeatId } = req.body
 
+	if(!fromRepeatId) {
+		fromRepeatId = null
+	}
 	const t = await sequelize.transaction()
 
 	try {
@@ -79,7 +82,10 @@ exports.create = async (req, res) => {
 					message: "Chat with this user already exists!",
 				})
 
-		const chat = await Chat.create({ type: "dual" }, { transaction: t })
+		const chat = await Chat.create(
+			{ type: "dual", parentId:fromRepeatId },
+			{ transaction: t }
+		)
 
 		await ChatUser.bulkCreate(
 			[

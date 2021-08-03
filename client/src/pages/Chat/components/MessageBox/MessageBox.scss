@@ -1,6 +1,7 @@
 .msg-box {
     scroll-behavior: auto;
     overflow-y: scroll;
+	position: relative;
     flex-grow: 2;
     height: 0;
     margin-bottom: 10px;

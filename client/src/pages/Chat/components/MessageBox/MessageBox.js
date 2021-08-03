@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState, Fragment } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import {getRepeatMsg} from "../../../../utils/utils"
 
 import { paginateMessages } from "../../../../store/actions/chat"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -16,6 +17,10 @@ const MessageBox = ({ chat }) => {
 	const senderTyping = useSelector((state) => state.chatReducer.senderTyping)
 	const [loading, setLoading] = useState(false)
 	const [scrollUp, setScrollUp] = useState(0)
+	const [currentMsg, setCurrentMsg] = useState(null)
+	const [currInd, setCurrInd] = useState(null)
+	const [showChatOptions, setShowChatOptions] = useState(false)
+
 
 
 	const msgBox = useRef()
@@ -68,15 +73,43 @@ const MessageBox = ({ chat }) => {
 			}, 100)
 		}
 	}, [scrollBottom])
+
+	const resetSett = () => {
+		setCurrInd(null)
+		setCurrentMsg(null)
+		setShowChatOptions(false)
+	}
+
+	const handlerClick = (ke) => {
+		if(currInd === ke) {
+			resetSett()
+			return
+		}
+
+		setCurrInd(ke)
+		setCurrentMsg(chat.Messages[ke])
+		setShowChatOptions(true)
+	}
+
+	const closeRepeatWin = (e) => {
+		e.stopPropagation()
+		resetSett()
+	}
 	
     return (
-			<div onScroll={handleInfiniteScroll} className="msg-box" id="msg-box" ref={msgBox}>
+			<div
+				onScroll={handleInfiniteScroll}
+				className="msg-box"
+				id="msg-box"
+				ref={msgBox}
+			>
 				{loading ? (
 					<p className="loader m-0">
 						<FontAwesomeIcon icon="spinner" className="fa-spin" />
 					</p>
 				) : null}
-				{chat.Messages.map((message, index) => {
+
+				{getRepeatMsg(chat.Messages).map((message, index) => {
 					return (
 						<Fragment>
 							<Message
@@ -84,11 +117,37 @@ const MessageBox = ({ chat }) => {
 								chat={chat}
 								message={message}
 								index={index}
+								showChatOptions={showChatOptions}
+								setShowChatOptions={setShowChatOptions}
+								handlerClick={handlerClick}
 								key={message.id}
 							/>
 						</Fragment>
 					)
 				})}
+				{showChatOptions ? (
+					<div className="settingsMsg">
+						<div className="container-repeat">
+							<div>
+								<FontAwesomeIcon
+									icon={["fas", "retweet"]}
+									className="fa-icon"
+								/>
+								<div>
+									<h6 className="m-0">
+										{currentMsg.User.firstName} {currentMsg.User.lastName}
+									</h6>
+									<p className="m-0">{currentMsg.message}</p>
+								</div>
+							</div>
+							<FontAwesomeIcon
+								icon={["fas", "plus-square"]}
+								className="fa-icon"
+								onClick={closeRepeatWin}
+							/>
+						</div>
+					</div>
+				) : null}
 				{senderTyping.typing && senderTyping.chatId === chat.id ? (
 					<div className="message mt-5p">
 						<div className="other-person">

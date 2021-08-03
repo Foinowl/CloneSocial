@@ -49,6 +49,12 @@ module.exports = {
 				chatId: chat.id,
 				fromUserId: users[1].id,
 			},
+			{
+				message: "Yep long time",
+				chatId: chat.id,
+				fromUserId: users[0].id,
+				parentId: 2,
+			},
 		])
 	},
 

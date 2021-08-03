@@ -11,7 +11,7 @@
         height: 100%;
         position: relative;
 
-         #settings {
+        #settings {
             border-radius: 5px;
             position: absolute;
             z-index: 15;
@@ -58,6 +58,63 @@
 				flex-direction: column;
         	}
         }
+
+
+		
+		.settingsMsg{
+			border-radius: 5px;
+			position: absolute;
+			z-index: 15;
+			bottom:0;
+			left: 0;
+			right: 0;
+			padding: 5px;
+			border: 1px solid #d9d9d9;
+			background-color: #fff;
+			display: flex;
+			flex-direction: column;
+
+			.container-repeat {
+                position: relative;
+                display: flex;
+				justify-content: space-between;
+                align-items: center;
+                padding: 5px;
+                cursor: pointer;
+
+				&>div{
+					display: flex;
+					align-items: center;
+				}
+
+                .fa-icon {
+                    position: relative;
+                    font-size: 20px;
+                    color: rgb(29, 161, 242);
+                    margin-right: 20px;
+                    min-width: 20px;
+                }
+            }
+
+            p {
+                margin: 5px 0;
+                color: #000;
+            }
+
+
+			@media (max-width: 800px) {
+				border-radius: 5px;
+				position: absolute;
+				z-index: 15;
+				right: 50px;
+				top: 285px;
+				padding: 5px;
+				border: 1px solid #d9d9d9;
+				background-color: #fff;
+				display: flex;
+				flex-direction: column;
+        	}
+		}
 
 
         &>.fa-icon {

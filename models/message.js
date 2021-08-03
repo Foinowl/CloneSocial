@@ -4,6 +4,7 @@ const config = require("../config/app")
 const {
   Model
 } = require('sequelize');
+const { QueryTypes } = require("sequelize")
 module.exports = (sequelize, DataTypes) => {
   class Message extends Model {
     /**
@@ -13,8 +14,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.Chat, { foreignKey: "chatId" })
-			this.belongsTo(models.User, { foreignKey: "fromUserId" })
+		this.belongsTo(models.Chat, { foreignKey: "chatId" })
+		this.belongsTo(models.User, { foreignKey: "fromUserId" })
+		this.belongsTo(models.Message, { foreignKey: "parentId" })
     }
   };
   Message.init(
@@ -40,5 +42,6 @@ module.exports = (sequelize, DataTypes) => {
 			modelName: "Message",
 		}
 	)
+
   return Message;
 };

@@ -5,3 +5,15 @@ export function range(start, end) {
 	}
 	return data
 }
+
+export function getRepeatMsg(messages) {
+	return messages.reduce((prev, curr) => {
+		if (curr.parentId) {
+			const parentMsg = messages.find((val) => val.id === curr.parentId)
+			curr = { ...curr, parentId: parentMsg }
+			return [ ...prev, curr ]
+		} else {
+			return [ ...prev, curr ]
+		}
+	}, [])
+}
