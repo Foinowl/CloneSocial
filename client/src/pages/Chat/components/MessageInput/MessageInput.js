@@ -4,7 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import ChatService from "../../../../services/chatService"
 import { Picker } from "emoji-mart"
-import { incrementScroll } from "../../../../store/actions/chat"
+import {
+	incrementScroll,
+	addCurrentRepeatMsg,
+	addCurrentIndexMsg,
+} from "../../../../store/actions/chat"
 
 import "emoji-mart/css/emoji-mart.css"
 
@@ -15,6 +19,8 @@ const MessageInput = ({chat}) => {
 	const user = useSelector((state) => state.auth.user)
 	const socket = useSelector((state) => state.chatReducer.socket)
 	const newMessage = useSelector((state) => state.chatReducer.newMessage)
+	const repeatMessage = useSelector((state) => state.chatReducer.repeatMessage)
+	const indexMessage = useSelector((state) => state.chatReducer.currentIdMsg)
 
 	const fileUpload = useRef()
 	const msgInput = useRef()
@@ -33,7 +39,7 @@ const MessageInput = ({chat}) => {
 	}
 
 	const sendMessage = (imageUpload) => {
-		if (message.length < 1 && !imageUpload) return
+		if ((message.length < 1 && !imageUpload) && !repeatMessage) return
 
 		const msg = {
 			type: imageUpload ? "image" : "text",
@@ -41,6 +47,7 @@ const MessageInput = ({chat}) => {
 			toUserId: chat.Users.map((user) => user.id),
 			chatId: chat.id,
 			message: imageUpload ? imageUpload : message,
+			parent: repeatMessage,
 		}
 
 		setMessage("")
@@ -121,11 +128,44 @@ const MessageInput = ({chat}) => {
 	const showNewMessage = () => {
 		dispatch(incrementScroll())
 		setShowNewMessageNotification(false)
-}
+	}
+
+	const closeRepeatWin = (e) => {
+		e.stopPropagation()
+		dispatch(addCurrentRepeatMsg(null))
+		dispatch(addCurrentIndexMsg(null))
+	}
+
 	
   return (
 		<div id="input-container">
 			<div id="image-upload-container">
+				<div>
+					{repeatMessage && indexMessage ? (
+						<div className="settingsMsg">
+							<div className="container-repeat">
+								<div>
+									<FontAwesomeIcon
+										icon={["fas", "retweet"]}
+										className="fa-icon"
+									/>
+									<div>
+										<h6 className="m-0">
+											{user.firstName}{" "}
+											{user.lastName}
+										</h6>
+										<p className="m-0">{repeatMessage.message}</p>
+									</div>
+								</div>
+								<FontAwesomeIcon
+									icon={["fas", "plus-square"]}
+									className="fa-icon"
+									onClick={closeRepeatWin}
+								/>
+							</div>
+						</div>
+					) : null}
+				</div>
 				<div>
 					{showNewMessageNotification ? (
 						<div id="message-notification" onClick={showNewMessage}>

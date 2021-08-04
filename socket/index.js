@@ -10,6 +10,7 @@ const SocketServer = (server) => {
 
     io.on('connection', (socket) => {
 
+		console.log("COnnection");
         socket.on('join', async (user) => {
             
 			let sockets = []
@@ -52,6 +53,7 @@ const SocketServer = (server) => {
         })
 
         socket.on('message', async (message) => {
+			console.log("New message", message);
             let sockets = []
 
             if (users.has(message.fromUser.id)) {
@@ -65,12 +67,14 @@ const SocketServer = (server) => {
             })
 
             try {
+				console.log("MESSAGE");
                 const msg = {
-                    type: message.type,
-                    fromUserId: message.fromUser.id,
-                    chatId: message.chatId,
-                    message: message.message
-                }
+									type: message.type,
+									fromUserId: message.fromUser.id,
+									chatId: message.chatId,
+									message: message.message,
+									parentId: message.parent ? message.parent.id : null,
+								}
 
                 const savedMessage = await Message.create(msg)
 
@@ -78,7 +82,8 @@ const SocketServer = (server) => {
                 message.fromUserId = message.fromUser.id
                 message.id = savedMessage.id
                 message.message = savedMessage.message
-                delete message.fromUser
+				message.parentId = savedMessage.parentId, 
+				delete message.fromUser
 
                 sockets.forEach(socket => {
                     io.to(socket).emit('received', message)

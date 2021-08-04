@@ -13,6 +13,9 @@ export const CREATE_CHAT = 'CREATE_CHAT'
 export const ADD_USER_TO_GROUP = 'ADD_USER_TO_GROUP'
 export const LEAVE_CURRENT_CHAT = 'LEAVE_CURRENT_CHAT'
 export const DELETE_CURRENT_CHAT = 'DELETE_CURRENT_CHAT'
+export const REPEAT_MESSAGE = "REPEAT_MESSAGE"
+export const SET_INDEX_MESSAGE = 'SET_INDEX_MESSAGE'
+
 
 export const fetchChats = () => dispatch => {
     return ChatService.fetchChats()
@@ -97,4 +100,12 @@ export const leaveCurrentChat = (data) => dispatch => {
 
 export const deleteCurrentChat = (chatId) => dispatch => {
     dispatch({ type: DELETE_CURRENT_CHAT, payload: chatId })
+}
+
+export const addCurrentRepeatMsg = (data) => dispatch => {
+	dispatch({ type: REPEAT_MESSAGE, payload: data })
+}
+
+export const addCurrentIndexMsg = (data) => dispatch => {
+	dispatch({ type: SET_INDEX_MESSAGE, payload: data})
 }

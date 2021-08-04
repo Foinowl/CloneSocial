@@ -1,26 +1,30 @@
 import {
-    FETCH_CHATS,
-    SET_CURRENT_CHAT,
-    FRIENDS_ONLINE,
-    FRIEND_ONLINE,
-    FRIEND_OFFLINE,
-    SET_SOCKET,
-    RECEIVED_MESSAGE,
-    SENDER_TYPING,
-    PAGINATE_MESSAGES,
-    INCREMENT_SCROLL,
-    CREATE_CHAT,
-    ADD_USER_TO_GROUP,
-    LEAVE_CURRENT_CHAT,
-    DELETE_CURRENT_CHAT
-} from '../actions/chat'
+	FETCH_CHATS,
+	SET_CURRENT_CHAT,
+	FRIENDS_ONLINE,
+	FRIEND_ONLINE,
+	FRIEND_OFFLINE,
+	SET_SOCKET,
+	RECEIVED_MESSAGE,
+	SENDER_TYPING,
+	PAGINATE_MESSAGES,
+	INCREMENT_SCROLL,
+	CREATE_CHAT,
+	ADD_USER_TO_GROUP,
+	LEAVE_CURRENT_CHAT,
+	DELETE_CURRENT_CHAT,
+	REPEAT_MESSAGE,
+	SET_INDEX_MESSAGE,
+} from "../actions/chat"
 
 const initialState = {
     chats: [],
     currentChat: {},
+	repeatMessage: null,
     socket: {},
     newMessage: { chatId: null, seen: null },
     scrollBottom: 0,
+	currentIdMsg: null,
     senderTyping: { typing: false }
 }
 
@@ -355,6 +359,18 @@ const chatReducer = (state = initialState, action) => {
                 currentChat: state.currentChat.id === payload ? {} : state.currentChat
             }
         }
+		case REPEAT_MESSAGE: {
+			return {
+				...state, 
+				repeatMessage: payload
+			}
+		}
+		case SET_INDEX_MESSAGE: {
+			return {
+				...state,
+				currentIdMsg: payload
+			}
+		}
 
         default: {
             return state

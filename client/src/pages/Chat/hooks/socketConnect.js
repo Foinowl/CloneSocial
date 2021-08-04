@@ -9,10 +9,11 @@ function useSocket(user, dispatch) {
         dispatch(fetchChats())
             .then(res => {
 
-                const socket = socketIOClient.connect(
-									"https://clonet-chat.herokuapp.com/"
-								)
-
+                // const socket = socketIOClient.connect(
+				// 					"https://clonet-chat.herokuapp.com/"
+				// 				)
+				
+                const socket = socketIOClient.connect("http://localhost:3005/")
                 
                 dispatch(setSocket(socket))
 

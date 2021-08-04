@@ -36,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			chatId: DataTypes.INTEGER,
 			fromUserId: DataTypes.INTEGER,
+			parentId: DataTypes.INTEGER,
 		},
 		{
 			sequelize,
