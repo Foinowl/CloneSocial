@@ -9,11 +9,19 @@ const Message = ({
 	chat,
 	index,
 	message,
-	showChatOptions,
-	setShowChatOptions,
+	currentActiveMsg,
+	setCurrentActiveMsg,
+	loadPrevMessages,
+	parentId,
 	handlerClick,
 }) => {
-	const [stateFocus, setStateFocus] = useState(false)
+	if(typeof parentId === 'object') {
+		if (typeof parentId?.parentId === "number") {
+			loadPrevMessages()
+		}
+		parentId = parentId?.id
+	}
+
 	const determineMargin = () => {
 		if (index + 1 === chat.Messages.length) return
 
@@ -22,11 +30,15 @@ const Message = ({
 			: "mb-10"
 	}
 
-	// const handlerClick = (e) => {
-	// 	setShowChatOptions(!showChatOptions)
-	// }
 	const determMsg = (e) => {
+		e.stopPropagation()
+		setCurrentActiveMsg(null)
 		handlerClick(index)
+	}
+
+	const handlerRepeatClick = (e) => {
+		e.stopPropagation()
+		setCurrentActiveMsg(parentId)
 	}
 
 	return (
@@ -34,7 +46,7 @@ const Message = ({
 			<div
 				className={`message ${determineMargin()} ${
 					message.fromUserId === user.id ? "creator" : ""
-				} ${stateFocus ? "focus" : ""}`}
+				} ${currentActiveMsg === message.id ? "focus" : ""}`}
 				onClick={determMsg}
 			>
 				<div
@@ -42,7 +54,10 @@ const Message = ({
 				>
 					{message.parentId ? (
 						<>
-							<div className="repeat">
+							<div
+								className="repeat"
+								onClick={handlerRepeatClick}
+							>
 								{message.fromUserId !== user.id || message.parentId ? (
 									<h6 className="m-0">
 										{message.parentId.User.firstName}{" "}

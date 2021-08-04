@@ -54,6 +54,7 @@ const MessageInput = ({chat}) => {
 		setImage("")
 		setShowEmojiPicker(false)
 		msgInput.current.value = ""
+		closeRepeatWin()
 
 		// send message with socket
 		socket.emit("message", msg)
@@ -130,8 +131,7 @@ const MessageInput = ({chat}) => {
 		setShowNewMessageNotification(false)
 	}
 
-	const closeRepeatWin = (e) => {
-		e.stopPropagation()
+	const closeRepeatWin = () => {
 		dispatch(addCurrentRepeatMsg(null))
 		dispatch(addCurrentIndexMsg(null))
 	}
@@ -141,7 +141,7 @@ const MessageInput = ({chat}) => {
 		<div id="input-container">
 			<div id="image-upload-container">
 				<div>
-					{repeatMessage && indexMessage ? (
+					{repeatMessage ? (
 						<div className="settingsMsg">
 							<div className="container-repeat">
 								<div>

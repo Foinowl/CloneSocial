@@ -24,14 +24,14 @@ const MessageBox = ({ chat }) => {
 	const user = useSelector((state) => state.auth.user)
 	const scrollBottom = useSelector((state) => state.chatReducer.scrollBottom)
 	const senderTyping = useSelector((state) => state.chatReducer.senderTyping)
+	const currentChat = useSelector((state) => state.chatReducer.currentChat)
+
 	const [loading, setLoading] = useState(false)
 	const [scrollUp, setScrollUp] = useState(0)
+	const [currentActiveMsg, setCurrentActiveMsg] = useState(null)
 
 	const [currentMsg, setCurrentMsg] = useState(repeatMessage)
 	const [currInd, setCurrInd] = useState(indexMessage)
-
-	const [showChatOptions, setShowChatOptions] = useState(false)
-
 
 
 	const msgBox = useRef()
@@ -59,6 +59,23 @@ const MessageBox = ({ chat }) => {
 				})
 		}
 	}
+
+	const loadPrevMessages = () => {
+		const pagination = chat.Pagination
+		const page = typeof pagination === "undefined" ? 1 : pagination.page
+
+		dispatch(paginateMessages(chat.id, parseInt(page) + 1))
+			.then((res) => {
+				setLoading(false)
+			})
+			.catch((err) => {
+				setLoading(false)
+			})
+	}
+
+	useEffect(() => {
+		console.log("CHATT");
+	},[currentChat])
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -126,22 +143,26 @@ const MessageBox = ({ chat }) => {
 					</p>
 				) : null}
 
-				{getRepeatMsg(chat.Messages).map((message, index) => {
-					return (
-						<Fragment>
-							<Message
-								user={user}
-								chat={chat}
-								message={message}
-								index={index}
-								showChatOptions={showChatOptions}
-								setShowChatOptions={setShowChatOptions}
-								handlerClick={handlerClick}
-								key={message.id}
-							/>
-						</Fragment>
-					)
-				})}
+				{getRepeatMsg(chat, chat.Messages).map(
+					(message, index) => {
+						return (
+							<Fragment>
+								<Message
+									user={user}
+									chat={chat}
+									message={message}
+									parentId={message.parentId}
+									index={index}
+									loadPrevMessages={loadPrevMessages}
+									currentActiveMsg={currentActiveMsg}
+									setCurrentActiveMsg={setCurrentActiveMsg}
+									handlerClick={handlerClick}
+									key={message.id}
+								/>
+							</Fragment>
+						)
+					}
+				)}
 				{senderTyping.typing && senderTyping.chatId === chat.id ? (
 					<div className="message mt-5p">
 						<div className="other-person">

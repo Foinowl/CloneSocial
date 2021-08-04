@@ -16,6 +16,4 @@ export class Validators {
 	static emailRequired(value = "") {
 		return new RegExp(emailRegExp).test(value)
 	}
-
-	
 }
