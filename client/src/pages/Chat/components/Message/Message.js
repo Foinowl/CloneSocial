@@ -51,7 +51,6 @@ const Message = ({
 							<div className="repeat" onClick={handlerRepeatClick}>
 								{message.fromUserId !== user.id || message?.parentId ? (
 									<h6 className="m-0">
-										{console.log("m332a", message?.parentId)}
 										{message?.parentId.User.firstName}
 										{message?.parentId.User.lastName}
 									</h6>

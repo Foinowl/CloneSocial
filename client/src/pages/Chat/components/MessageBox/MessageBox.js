@@ -138,26 +138,24 @@ const MessageBox = ({ chat }) => {
 					</p>
 				) : null}
 
-				{chat.Messages.map(
-					(message, index) => {
-						return (
-							<Fragment>
-								<Message
-									user={user}
-									chat={chat}
-									message={message}
-									parentId={message.parentId}
-									index={index}
-									loadPrevMessages={loadPrevMessages}
-									currentActiveMsg={currentActiveMsg}
-									setCurrentActiveMsg={setCurrentActiveMsg}
-									handlerClick={handlerClick}
-									key={message.id}
-								/>
-							</Fragment>
-						)
-					}
-				)}
+				{getRepeatMsg(chat.Messages).map((message, index) => {
+					return (
+						<Fragment>
+							<Message
+								user={user}
+								chat={chat}
+								message={message}
+								parentId={message.parentId}
+								index={index}
+								loadPrevMessages={loadPrevMessages}
+								currentActiveMsg={currentActiveMsg}
+								setCurrentActiveMsg={setCurrentActiveMsg}
+								handlerClick={handlerClick}
+								key={message.id}
+							/>
+						</Fragment>
+					)
+				})}
 				{senderTyping.typing && senderTyping.chatId === chat.id ? (
 					<div className="message mt-5p">
 						<div className="other-person">
