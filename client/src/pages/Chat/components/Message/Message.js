@@ -15,12 +15,6 @@ const Message = ({
 	parentId,
 	handlerClick,
 }) => {
-	if(typeof parentId === 'object') {
-		if (typeof parentId?.parentId === "number") {
-			loadPrevMessages()
-		}
-		parentId = parentId?.id
-	}
 
 	const determineMargin = () => {
 		if (index + 1 === chat.Messages.length) return
@@ -52,16 +46,14 @@ const Message = ({
 				<div
 					className={message.fromUserId === user.id ? "owner" : "other-person"}
 				>
-					{message.parentId ? (
+					{message?.parentId ? (
 						<>
-							<div
-								className="repeat"
-								onClick={handlerRepeatClick}
-							>
-								{message.fromUserId !== user.id || message.parentId ? (
+							<div className="repeat" onClick={handlerRepeatClick}>
+								{message.fromUserId !== user.id || message?.parentId ? (
 									<h6 className="m-0">
-										{message.parentId.User.firstName}{" "}
-										{message.parentId.User.lastName}
+										{console.log("m332a", message?.parentId)}
+										{message?.parentId.User.firstName}
+										{message?.parentId.User.lastName}
 									</h6>
 								) : null}{" "}
 								{message.type === "text" ? (

@@ -24,7 +24,6 @@ const MessageBox = ({ chat }) => {
 	const user = useSelector((state) => state.auth.user)
 	const scrollBottom = useSelector((state) => state.chatReducer.scrollBottom)
 	const senderTyping = useSelector((state) => state.chatReducer.senderTyping)
-	const currentChat = useSelector((state) => state.chatReducer.currentChat)
 
 	const [loading, setLoading] = useState(false)
 	const [scrollUp, setScrollUp] = useState(0)
@@ -72,10 +71,6 @@ const MessageBox = ({ chat }) => {
 				setLoading(false)
 			})
 	}
-
-	useEffect(() => {
-		console.log("CHATT");
-	},[currentChat])
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -143,7 +138,7 @@ const MessageBox = ({ chat }) => {
 					</p>
 				) : null}
 
-				{getRepeatMsg(chat, chat.Messages).map(
+				{chat.Messages.map(
 					(message, index) => {
 						return (
 							<Fragment>

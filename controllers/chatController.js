@@ -39,16 +39,14 @@ exports.index = async (req, res) => {
 		],
 	})
 
+	const payload = await createRepeatMessage(user.Chats)
 	return res.json(user.Chats)
 }
 
 
 exports.create = async (req, res) => {
-	const { partnerId, fromRepeatId } = req.body
+	const { partnerId } = req.body
 
-	if(!fromRepeatId) {
-		fromRepeatId = null
-	}
 	const t = await sequelize.transaction()
 
 	try {
@@ -83,7 +81,7 @@ exports.create = async (req, res) => {
 				})
 
 		const chat = await Chat.create(
-			{ type: "dual", parentId:fromRepeatId },
+			{ type: "dual"},
 			{ transaction: t }
 		)
 
@@ -179,6 +177,7 @@ exports.messages = async (req, res) => {
 
 	if (page > totalPages) return res.json({ data: { messages: [] } })
 
+	// const msg = await fetchMessage(messages.rows, req.query.id)
 	const result = {
 		messages: messages.rows,
 		pagination: {
@@ -328,4 +327,97 @@ exports.addUserToGroup = async (req, res) => {
 	} catch (e) {
 		return res.status(500).json({ status: "Error", message: e.message })
 	}
+}
+
+
+const fetchMessage = async (data, chatId) => {
+	const changeData = data[0]
+
+	const messages = await Message.findAndCountAll({
+		where: {
+			chatId: chatId,
+		},
+		include: [
+			{
+				model: User,
+			},
+		],
+		order: [["id", "DESC"]],
+	})
+
+	const mes = messages.rows.reduce((prev, curr) => {
+		return [...prev, curr.dataValues]
+	}, [])
+
+	Object.keys(changeData).forEach(function (key) {
+		console.log("LOGO", this[key])
+		// if (key === "rows") {
+		// 	Object.keys(this[key]).forEach((k) => {
+		// 		if (this[key][k]) {
+		// 			console.log("LOGO",this[key][k])
+		// 			const parentMsg = mes.find((val) => {
+		// 				return val.id === this[key][k].parentId
+		// 			})
+		// 			this[key][k].parentId = parentMsg
+		// 		}
+		// 	})
+		// }
+	}, changeData)
+
+	// console.log("changeData", changeData)
+	return [changeData]
+}
+
+const createRepeatMessage = async (data) => {
+	const changeData = data[0]
+	const userId = data[0].id
+	const allMsgByUser = await User.findOne({
+		where: {
+			id: userId,
+		},
+		include: [
+			{
+				model: Chat,
+				include: [
+					{
+						model: User,
+						where: {
+							[Op.not]: {
+								id: userId,
+							},
+						},
+					},
+					{
+						model: Message,
+						include: [
+							{
+								model: User,
+							},
+						],
+						order: [["id", "DESC"]],
+					},
+				],
+			},
+		],
+	})
+
+	const mes = allMsgByUser.Chats.reduce((prev, curr) => {
+		return [...prev, ...curr.dataValues.Messages]
+	}, [])
+
+	Object.keys(changeData).forEach(function (key) {
+		if (key === "Messages") {
+			Object.keys(this[key]).forEach((k) => {
+				if (this[key][k].parentId) {
+					// console.log(this[key][k].parentId)
+					const parentMsg = mes.find(
+						(val) => {return val.id === this[key][k].parentId}
+					)
+					this[key][k].parentId = parentMsg
+
+				}
+			})
+		}
+	}, changeData)
+	return [changeData]
 }
