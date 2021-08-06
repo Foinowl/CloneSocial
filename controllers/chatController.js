@@ -30,6 +30,10 @@ exports.index = async (req, res) => {
 							{
 								model: User,
 							},
+							{
+								model: Message,
+								as: "children",
+							},
 						],
 						limit: 20,
 						order: [["id", "DESC"]],

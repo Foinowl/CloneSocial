@@ -11,11 +11,6 @@ module.exports = {
 			parentId: {
 				type: Sequelize.INTEGER,
 				allowNull: true,
-				references: {
-					model: "Messages",
-					key: "id",
-				},
-				onDelete: "CASCADE",
 			},
 			type: {
 				type: Sequelize.STRING,

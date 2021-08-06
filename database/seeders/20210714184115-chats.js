@@ -53,7 +53,7 @@ module.exports = {
 				message: "Yep long time",
 				chatId: chat.id,
 				fromUserId: users[0].id,
-				parentId: 2,
+				parentId: 3,
 			},
 		])
 	},

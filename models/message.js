@@ -16,7 +16,14 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
 		this.belongsTo(models.Chat, { foreignKey: "chatId" })
 		this.belongsTo(models.User, { foreignKey: "fromUserId" })
-		this.belongsTo(models.Message, { foreignKey: "parentId" })
+		// this.belongsTo(models.Message, { foreignKey: "parentId" })
+
+
+		this.belongsTo(models.Message, {
+			onDelete: "CASCADE",
+			foreignKey: "parentId",
+			as: "children",
+		})
     }
   };
   Message.init(
@@ -36,7 +43,6 @@ module.exports = (sequelize, DataTypes) => {
 			},
 			chatId: DataTypes.INTEGER,
 			fromUserId: DataTypes.INTEGER,
-			parentId: DataTypes.INTEGER,
 		},
 		{
 			sequelize,
