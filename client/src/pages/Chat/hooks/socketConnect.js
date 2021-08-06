@@ -9,11 +9,11 @@ function useSocket(user, dispatch) {
         dispatch(fetchChats())
             .then(res => {
 
-                const socket = socketIOClient.connect(
-									"https://clonet-chat.herokuapp.com/"
-								)
+                // const socket = socketIOClient.connect(
+				// 					"https://clonet-chat.herokuapp.com/"
+				// 				)
 				
-                // const socket = socketIOClient.connect("http://localhost:3005/")
+                const socket = socketIOClient.connect("http://localhost:3005/")
                 
                 dispatch(setSocket(socket))
 
@@ -24,18 +24,15 @@ function useSocket(user, dispatch) {
                 })
 
                 socket.on('friends', (friends) => {
-                    console.log("Friends", friends);
                     dispatch(onlineFriends(friends))
                 })
 
                 socket.on('online', (user) => {
                     dispatch(onlineFriend(user))
-                    console.log("Online", user);
                 })
 
                 socket.on('offline', (user) => {
                     dispatch(offlineFriend(user))
-                    console.log("Offline", user);
                 })
 
                 socket.on('received', (message) => {

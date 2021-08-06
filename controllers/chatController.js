@@ -32,6 +32,9 @@ exports.index = async (req, res) => {
 							},
 							{
 								model: Message,
+								include: [{
+									model: User,
+								}],
 								as: "children",
 							},
 						],
@@ -167,8 +170,15 @@ exports.messages = async (req, res) => {
 			chatId: req.query.id,
 		},
 		include: [
+			{ model: User },
 			{
-				model: User,
+				model: Message,
+				include: [
+					{
+						model: User,
+					},
+				],
+				as: "children",
 			},
 		],
 		limit,

@@ -1,6 +1,9 @@
 const socketIo = require('socket.io')
 const { sequelize } = require('../models')
 const Message = require('../models').Message
+const User = require("../models").User
+
+
 
 const users = new Map()
 const userSockets = new Map()
@@ -53,7 +56,6 @@ const SocketServer = (server) => {
         })
 
         socket.on('message', async (message) => {
-			console.log("New message", message);
             let sockets = []
 
             if (users.has(message.fromUser.id)) {
@@ -67,26 +69,34 @@ const SocketServer = (server) => {
             })
 
             try {
-				console.log("MESSAGE");
                 const msg = {
-									type: message.type,
-									fromUserId: message.fromUser.id,
-									chatId: message.chatId,
-									message: message.message,
-									parentId: message.parent ? message.parent.id : null,
-								}
+							type: message.type,
+							fromUserId: message.fromUser.id,
+							chatId: message.chatId,
+							message: message.message,
+							parentId: message.parentId || null,
+				}
 
+	
                 const savedMessage = await Message.create(msg)
 
-                message.User = message.fromUser
-                message.fromUserId = message.fromUser.id
-                message.id = savedMessage.id
-                message.message = savedMessage.message
-				message.parentId = savedMessage.parentId, 
-				delete message.fromUser
+
+				const returnMsg = await Message.findOne({
+					where: savedMessage.id,
+					include: [
+							{model: User},
+							{
+								model: Message,
+								include: [{
+									model: User,
+								}],
+								as: "children",
+							},
+						],
+				})
 
                 sockets.forEach(socket => {
-                    io.to(socket).emit('received', message)
+                    io.to(socket).emit("received", returnMsg)
                 })
 
             } catch (e) { }

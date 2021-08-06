@@ -47,7 +47,7 @@ const MessageInput = ({chat}) => {
 			toUserId: chat.Users.map((user) => user.id),
 			chatId: chat.id,
 			message: imageUpload ? imageUpload : message,
-			parent: repeatMessage,
+			parentId: repeatMessage?.id || null,
 		}
 
 		setMessage("")

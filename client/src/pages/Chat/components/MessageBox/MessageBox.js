@@ -138,7 +138,7 @@ const MessageBox = ({ chat }) => {
 					</p>
 				) : null}
 
-				{getRepeatMsg(chat.Messages).map((message, index) => {
+				{chat.Messages.map((message, index) => {
 					return (
 						<Fragment>
 							<Message
@@ -151,6 +151,7 @@ const MessageBox = ({ chat }) => {
 								currentActiveMsg={currentActiveMsg}
 								setCurrentActiveMsg={setCurrentActiveMsg}
 								handlerClick={handlerClick}
+								scrollManual={scrollManual}
 								key={message.id}
 							/>
 						</Fragment>

@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useRef } from "react"
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import "./Message.scss"
 
@@ -8,14 +7,14 @@ const Message = ({
 	user,
 	chat,
 	index,
+	key,
 	message,
 	currentActiveMsg,
 	setCurrentActiveMsg,
-	loadPrevMessages,
 	parentId,
 	handlerClick,
 }) => {
-
+	const refMsg = useRef()
 	const determineMargin = () => {
 		if (index + 1 === chat.Messages.length) return
 
@@ -41,6 +40,8 @@ const Message = ({
 				className={`message ${determineMargin()} ${
 					message.fromUserId === user.id ? "creator" : ""
 				} ${currentActiveMsg === message.id ? "focus" : ""}`}
+				key={key}
+				data-id={key}
 				onClick={determMsg}
 			>
 				<div
@@ -51,12 +52,12 @@ const Message = ({
 							<div className="repeat" onClick={handlerRepeatClick}>
 								{message.fromUserId !== user.id || message?.parentId ? (
 									<h6 className="m-0">
-										{message?.parentId.User.firstName}
-										{message?.parentId.User.lastName}
+										{message?.children.User.firstName}
+										{message?.children.User.lastName}
 									</h6>
 								) : null}{" "}
 								{message.type === "text" ? (
-									<p className="m-0">{message.parentId.message}</p>
+									<p className="m-0">{message?.children.message}</p>
 								) : (
 									<img src={message.message} alt="User upload" />
 								)}
