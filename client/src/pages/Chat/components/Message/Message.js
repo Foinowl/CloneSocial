@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React from "react"
 
 
 import "./Message.scss"
@@ -13,8 +13,9 @@ const Message = ({
 	setCurrentActiveMsg,
 	parentId,
 	handlerClick,
+	handlerRepeatClick,
 }) => {
-	const refMsg = useRef()
+
 	const determineMargin = () => {
 		if (index + 1 === chat.Messages.length) return
 
@@ -23,16 +24,13 @@ const Message = ({
 			: "mb-10"
 	}
 
+
 	const determMsg = (e) => {
 		e.stopPropagation()
 		setCurrentActiveMsg(null)
 		handlerClick(index)
 	}
 
-	const handlerRepeatClick = (e) => {
-		e.stopPropagation()
-		setCurrentActiveMsg(parentId)
-	}
 
 	return (
 		<>
@@ -41,7 +39,7 @@ const Message = ({
 					message.fromUserId === user.id ? "creator" : ""
 				} ${currentActiveMsg === message.id ? "focus" : ""}`}
 				key={key}
-				data-id={key}
+				tabIndex={index}
 				onClick={determMsg}
 			>
 				<div
@@ -49,7 +47,10 @@ const Message = ({
 				>
 					{message?.parentId ? (
 						<>
-							<div className="repeat" onClick={handlerRepeatClick}>
+							<div
+								className="repeat"
+								onClick={(e) => handlerRepeatClick(e, parentId, index)}
+							>
 								{message.fromUserId !== user.id || message?.parentId ? (
 									<h6 className="m-0">
 										{message?.children.User.firstName}

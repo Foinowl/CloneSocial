@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState, Fragment } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import {getRepeatMsg} from "../../../../utils/utils"
 
 import { paginateMessages } from "../../../../store/actions/chat"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -28,6 +27,7 @@ const MessageBox = ({ chat }) => {
 	const [loading, setLoading] = useState(false)
 	const [scrollUp, setScrollUp] = useState(0)
 	const [currentActiveMsg, setCurrentActiveMsg] = useState(null)
+	const [indexScroll, setIndexScroll] = useState(0)
 
 	const [currentMsg, setCurrentMsg] = useState(repeatMessage)
 	const [currInd, setCurrInd] = useState(indexMessage)
@@ -109,6 +109,22 @@ const MessageBox = ({ chat }) => {
 		setCurrentMsg(repeatMessage)
 	}, [repeatMessage, indexMessage])
 
+
+	useEffect(() => {
+		const scrollHeightIndex = Array.from(msgBox.current.children).reduceRight(
+			(prev, curr, index) => {
+				if(indexScroll < index) {
+					return prev + curr.scrollHeight
+				}
+				else{
+					return prev
+				}
+			},
+			0
+		)
+		scrollManual(msgBox.current.scrollTop - scrollHeightIndex)
+	}, [indexScroll])
+
 	const resetSett = () => {
 		setCurrInd(null)
 		setCurrentMsg(null)
@@ -122,6 +138,14 @@ const MessageBox = ({ chat }) => {
 
 		setCurrInd(ke)
 		setCurrentMsg(chat.Messages[ke])
+	}
+
+	const handlerRepeatClick = (e, parentId) => {
+		e.stopPropagation()
+
+		const indexToScroll = chat.Messages.findIndex((el) => el.id === parentId)
+		setIndexScroll(indexToScroll)
+		setCurrentActiveMsg(parentId)
 	}
 
 	
@@ -150,8 +174,10 @@ const MessageBox = ({ chat }) => {
 								loadPrevMessages={loadPrevMessages}
 								currentActiveMsg={currentActiveMsg}
 								setCurrentActiveMsg={setCurrentActiveMsg}
+								handlerRepeatClick={handlerRepeatClick}
 								handlerClick={handlerClick}
 								scrollManual={scrollManual}
+								msgBox={msgBox}
 								key={message.id}
 							/>
 						</Fragment>
