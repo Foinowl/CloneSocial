@@ -1,7 +1,6 @@
 import axios from "axios"
 import {store} from "../store/index"
 import { logout } from "../store/actions/auth"
-import { useSelector } from 'react-redux'
 
 const data = JSON.parse(localStorage.getItem("persist:user"))
 const newData = data

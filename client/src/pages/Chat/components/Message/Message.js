@@ -37,11 +37,12 @@ const Message = ({
 			<div
 				className={`message ${determineMargin()} ${
 					message.fromUserId === user.id ? "creator" : ""
-				} ${currentActiveMsg === message.id ? "focus" : ""}`}
+				}`}
 				key={key}
 				tabIndex={index}
 				onClick={determMsg}
 			>
+				<div className={`${currentActiveMsg === message.id ? "focus" : ""}`}></div>
 				<div
 					className={message.fromUserId === user.id ? "owner" : "other-person"}
 				>

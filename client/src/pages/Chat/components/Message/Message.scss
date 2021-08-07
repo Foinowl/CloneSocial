@@ -3,8 +3,27 @@
 }
 
 .focus {
-	background: #eff1f4;
+	position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 2px;
+    top: 0;
+    bottom: 0;
+	background: #d1d3d8;
+	animation: fade 6s ease forwards;
 }
+
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+
 .message {
     display: flex;
     padding-right: 5px;
@@ -27,11 +46,13 @@
         background-color: rgb(29, 161, 242);
         color: white;
         padding: 10px;
+		z-index: 5;
     }
 
     .other-person {
         background-color: #f5f6f8;
         padding: 10px;
+		z-index: 5;
     }
 
     .dots {
