@@ -29,7 +29,7 @@ const Messenger = () => {
 					<MessageInput chat={chat} />
 				</div>
 			) : (
-				<p>No active chat</p>
+				<p style={{position: 'absolute', margin: 0,top: '50%', left: '50%', transform: 'translate(-50%, -50%)', fontSize: '18px', fontWeight: 600}}>No active chat</p>
 			)}
 		</div>
 	)
