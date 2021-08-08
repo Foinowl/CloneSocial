@@ -3,7 +3,6 @@ import { LOGIN, REGISTER, LOGOUT, UPDATE_PROFILE } from "../types/index"
 
 
 export const login = (params, history) => (dispatch) => {
-	console.log(params);
 	return AuthService.login(params)
 		.then((data) => {
 			dispatch({ type: LOGIN, payload: data })
@@ -14,7 +13,6 @@ export const login = (params, history) => (dispatch) => {
 }
 
 export const register = (params, history) => (dispatch) => {
-	console.log(params);
 	return AuthService.register(params)
 		.then((data) => {
 			dispatch({ type: REGISTER, payload: data })

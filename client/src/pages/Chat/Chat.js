@@ -12,12 +12,6 @@ import "./Chat.scss"
 
 export const Chat = () => {
 
-	
-	console.log(
-		"Chat user",
-		useSelector((state) => state.auth.user)
-	)
-	console.log("Load chat page")
     const dispatch = useDispatch()
 	const user = useSelector((state) => state.auth.user)
 
