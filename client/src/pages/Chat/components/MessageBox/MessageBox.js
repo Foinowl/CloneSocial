@@ -29,6 +29,7 @@ const MessageBox = ({ chat }) => {
 	const [fetchScrollUp, setFetchScrollUp] = useState(0)
 	const [currentActiveMsg, setCurrentActiveMsg] = useState(null)
 	const [indexScroll, setIndexScroll] = useState(0)
+	const [fromMsgScroll, setFromMsgScroll] = useState(0)
 
 	const [currentMsg, setCurrentMsg] = useState(repeatMessage)
 	const [currInd, setCurrInd] = useState(indexMessage)
@@ -112,15 +113,15 @@ const MessageBox = ({ chat }) => {
 
 
 	useEffect(() => {
-		if(indexScroll === 0) {
+		if (indexScroll === 0) {
 			return
 		}
-		const scrollHeightIndex = Array.from(msgBox.current.children).reduceRight(
+		setTimeout(() => {
+					const scrollHeightIndex = Array.from(msgBox.current.children).reduceRight(
 			(prev, curr, index) => {
-				if(indexScroll < index) {
+				if (indexScroll < index && index < fromMsgScroll) {
 					return prev + curr.scrollHeight
-				}
-				else{
+				} else {
 					return prev
 				}
 			},
@@ -135,6 +136,7 @@ const MessageBox = ({ chat }) => {
 			setCurrentActiveMsg(0)
 		}, 6100)
 		return () => clearTimeout(timer)
+		}, 500)
 	}, [indexScroll])
 
 
@@ -145,6 +147,10 @@ const MessageBox = ({ chat }) => {
 		const indexToScroll = chat.Messages.findIndex(
 			(el) => el.id === fetchScrollUp
 		)
+		const indexFromScroll = chat.Messages.findIndex(
+			(el) => el.id === fromMsgScroll
+		)
+		setFromMsgScroll(indexFromScroll)
 		setIndexScroll(indexToScroll)
 		setCurrentActiveMsg(fetchScrollUp)
 	}, [fetchScrollUp])
@@ -164,26 +170,29 @@ const MessageBox = ({ chat }) => {
 		setCurrentMsg(chat.Messages[ke])
 	}
 
-	const handlerRepeatClick = (e, parentId) => {
+	const handlerRepeatClick = (e, parentId, fromId) => {
 		e.stopPropagation()
 
 		const indexToScroll = chat.Messages.findIndex((el) => el.id === parentId)
+		const indexFromScroll = chat.Messages.findIndex((el) => el.id === fromId)
 		if(indexToScroll === -1) {
 			const page = Math.ceil(
 				(chat.Messages[chat.Messages.length - 1].id - parentId) / 20
-			)
+			) + 1
 			if(page < 1) {
 				return
 			}
 			dispatch(paginateMessages(chat.id, page))
 				.then((res) => {
 					if (res) {
+						setFromMsgScroll(fromId)
 						setFetchScrollUp(parentId)
 					}
 				})
 				.catch((err) => {})			
 		}
 		else{
+			setFromMsgScroll(indexFromScroll)
 			setIndexScroll(indexToScroll)
 			setCurrentActiveMsg(parentId)
 		}

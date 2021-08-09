@@ -42,7 +42,9 @@ const Message = ({
 				tabIndex={index}
 				onClick={determMsg}
 			>
-				<div className={`${currentActiveMsg === message.id ? "focus" : ""}`}></div>
+				<div
+					className={`${currentActiveMsg === message.id ? "focus" : ""}`}
+				></div>
 				<div
 					className={message.fromUserId === user.id ? "owner" : "other-person"}
 				>
@@ -50,7 +52,7 @@ const Message = ({
 						<>
 							<div
 								className="repeat"
-								onClick={(e) => handlerRepeatClick(e, parentId, index)}
+								onClick={(e) => handlerRepeatClick(e, parentId, message.id)}
 							>
 								{message.fromUserId !== user.id || message?.parentId ? (
 									<h6 className="m-0">
